@@ -8,11 +8,11 @@
 #' gamma distribution
 #' @param w A positive real number representing the aliquot volume 
 #' @param rho A number in (0, 1). The probability of the credible interval is equal or
-#' greater than $1-rho$ depending on the criterion used
+#' greater than $1-rho$ depending on the criterion used.
 #' @param len A positive real number representing the length of the credible intervals in the
-#' ACC criterion
+#' ACC criterion.
 #' @param len.max A positive real number representing the maximum length of the credible 
-#' intervals in the ALC criterion 
+#' intervals in the ALC criterion. 
 #' @param R Number of replicates used in the simulation. Default is 1000.
 #' @param n0 A positive integer representing the initial sample size in which the function 
 #' will check the criterion. Default is 1.
