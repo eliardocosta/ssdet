@@ -1,6 +1,6 @@
 # ssdet
 
-The goal of ssdet is to functions to compute sample size.
+The goal of ssdet is to provide functions to compute sample size.
 
 ## Installation
 
