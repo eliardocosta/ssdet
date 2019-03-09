@@ -1,28 +1,28 @@
 #' Bayesian sample size in a decision-theoretic approach for the Poisson/gamma model
 #'
-#' @param lf 1 or 2, representing the loss function used
+#' @param lf 1 or 2, representing the loss function used.
 #' @param lam0 A positive real number representing the prior expected value for the prior 
-#' gamma distribution
+#' gamma distribution.
 #' @param theta0 A positive real number representing the shape parameter for the prior 
-#' gamma distribution
-#' @param w A positive real number representing the aliquot volume 
-#' @param c A positive real number representing the cost of colect one aliquot
+#' gamma distribution.
+#' @param w A positive real number representing the aliquot volume.
+#' @param c A positive real number representing the cost of colect one aliquot.
 #' @param rho A number in (0, 1). The probability of the credible interval is $1-rho$. Only
 #' for lost function 1.
 #' @param gam A positive real number connected with the credible interval when using lost
-#' function 2
+#' function 2.
 #' @param nmax A positive integer representing the maximum number for compute the Bayes risk.
 #' Default is 100. 
-#' @param nrep A positive integer representing the number of samples taken for each $n$
-#' @param lrep A positive integer representing the number of samples taken for $S_n$
+#' @param nrep A positive integer representing the number of samples taken for each $n$.
+#' @param lrep A positive integer representing the number of samples taken for $S_n$.
 #' @param plot Boolean. If TRUE (default) it plot the estimated Bayes risks and the fitted
-#' curve
-#' @param ... Currently ignored 
+#' curve.
+#' @param ... Currently ignored.
 #'
-#' @return An integer representing the sample size
+#' @return An integer representing the sample size.
 #' @export
 #'
-bss.dt.poigam <- function(lf, lam0, theta0, w, c, rho = NULL, gam = NULL, nmax = 1E2, 
+bss.dt.Poigam <- function(lf, lam0, theta0, w, c, rho = NULL, gam = NULL, nmax = 1E2, 
                         nrep = 1E1, lrep = 1E3, plot = TRUE, ...) {
   cl <- match.call()
   ns <- seq(1, nmax, by = 5)
@@ -69,5 +69,5 @@ bss.dt.poigam <- function(lf, lam0, theta0, w, c, rho = NULL, gam = NULL, nmax =
   cat("\nCall:\n")
   print(cl)
   cat("\nSample size:\n")
-  cat("n  = ", nmin)
+  cat("n  = ", nmin, "\n")
 }

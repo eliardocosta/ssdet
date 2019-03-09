@@ -1,6 +1,6 @@
-#' Variance of the posterior distribution in the mixture of Dirichlet process.
+#' Variance of the the Poisson/mixture of Dirichlet process with a gamma distribution as the $F_0$ base distribution.
 #'
-#' @param x Counts of the Poisson distribution of the model.
+#' @param x Observed counts of the Poisson distribution of the model.
 #' @param w A positive real number representing the aliquot volume.
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution. 
 #' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.
@@ -8,7 +8,7 @@
 #' @param cgrid Length of the grid used in the points for which the probability is computed.
 #' @param nsam Number of samples to use in the simulation.
 #'
-#' @return A list with distribution of the mixture of Dirichlet processes.
+#' @return A list with the variance in each point of the Poisson/mixture of Dirichlet processes.
 #'
 #' @noRd
 #' 
@@ -30,4 +30,4 @@ var.postDPmix <- function(x = x, w = w, lam0 = lam0, theta0 = theta0, alpha = al
     }
   }
   return(list(lam = grid, varp = apply(vars, 2, mean), cgrid = cgrid))
-}
+} # END

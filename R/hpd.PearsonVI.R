@@ -4,14 +4,14 @@
 #' @param psi Second parameter of the posterior distribution.
 #' @param phi A positive real number representing a scale parameter of the prior distribution.
 #' @param w A positive real number representing the aliquot volume.
-#' @param len Length of the HPD interval
-#' @param rho Probability of the HPD interval
+#' @param len Length of the HPD interval.
+#' @param rho Probability of the HPD interval.
 #'
-#' @return
+#' @return Two number representing the HPD interval.
 #'
 #' @noRd
 #' 
-hpdPearsonVI <- function(kappa, psi, phi, w, len = NULL, rho = NULL) {
+hpd.PearsonVI <- function(kappa, psi, phi, w, len = NULL, rho = NULL) {
   if (is.null(len)) {
     fun <- function(x) c(F1 = PearsonDS::ppearsonVI(x[2], a = kappa, b = psi, location = 0,
                         scale = phi/w) - PearsonDS::ppearsonVI(x[1], a = kappa, b = psi,
@@ -36,4 +36,4 @@ hpdPearsonVI <- function(kappa, psi, phi, w, len = NULL, rho = NULL) {
     roots <- c(sol$root, sol$root + len)
   }
   return(roots)
-} # FIM
+} 

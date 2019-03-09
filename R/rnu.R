@@ -1,7 +1,7 @@
 #' Generate samples of the mixing distribution of the mixture of Dirichlet processes.
 #'
 #' @param nsam Number of samples to generate.
-#' @param x Counts of the Poisson distribution of the model.
+#' @param x Observed counts of the Poisson distribution of the model.
 #' @param w A positive real number representing the aliquot volume.
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution. 
 #' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.
@@ -22,7 +22,7 @@ rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 1E3) {
     for (i in 1:n) { 
       q0 <- alpha*dnbinom(x[i], mu = w*lam0, size = theta0)
       qk <- dpois(x[i], lambda = w*lam[-i])
-      cn <- q0 + sum(qk) # constante de normalizacao
+      cn <- q0 + sum(qk) # normalization constant
       q0n <- q0/cn
       qkn <- qk/cn
       u <- runif(1)
@@ -45,4 +45,4 @@ rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 1E3) {
     }
   }
   return(output)
-}
+} 

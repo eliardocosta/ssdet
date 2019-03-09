@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-bss.ci.nbpearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, len.max = NULL, 
+bss.ci.nbPearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, len.max = NULL, 
                              R = 1E3, n0 = 1) {
   cl <- match.call()
   if (crit == "ACC") {
@@ -61,5 +61,5 @@ bss.ci.nbpearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, len.ma
   cat("\nCall:\n")
   print(cl)
   cat("\nSample size:\n")
-  cat("n  = ", n)
+  cat("n  = ", n, "\n")
 } 

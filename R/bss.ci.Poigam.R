@@ -1,12 +1,12 @@
 #' Bayesian sample size using ACC or ALC criterion for the Poisson/gamma model
 #'
 #' @param crit A characther string specifying the criterion. Criteria: "ACC", "ALC" and
-#' "ALCApprox"
+#' "ALCApprox".
 #' @param lam0 A positive real number representing the prior expected value for the prior 
-#' gamma distribution
+#' gamma distribution.
 #' @param theta0 A positive real number representing the shape parameter for the prior 
-#' gamma distribution
-#' @param w A positive real number representing the aliquot volume 
+#' gamma distribution.
+#' @param w A positive real number representing the aliquot volume.
 #' @param rho A number in (0, 1). The probability of the credible interval is equal or
 #' greater than $1-rho$ depending on the criterion used.
 #' @param len A positive real number representing the length of the credible intervals in the
@@ -17,10 +17,10 @@
 #' @param n0 A positive integer representing the initial sample size in which the function 
 #' will check the criterion. Default is 1.
 #'
-#' @return An integer representing the sample size
+#' @return An integer representing the sample size.
 #' @export
 #'
-bss.ci.poigam <- function(crit, lam0, theta0, w, rho, len = NULL, len.max = NULL, 
+bss.ci.Poigam <- function(crit, lam0, theta0, w, rho, len = NULL, len.max = NULL, 
                           R = 1E3, n0 = 1) {
   cl <- match.call()
   if (crit == "ALCAprox") {
@@ -63,5 +63,5 @@ bss.ci.poigam <- function(crit, lam0, theta0, w, rho, len = NULL, len.max = NULL
   cat("\nCall:\n")
   print(cl)
   cat("\nSample size:\n")
-  cat("n  = ", n)
+  cat("n  = ", n, "\n")
 } 

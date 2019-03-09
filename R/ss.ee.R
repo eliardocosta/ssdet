@@ -2,25 +2,25 @@
 #' the maximum relative error or both
 #'
 #' @param dist A characther string specifying the probability distribution. Distributions: 
-#' "binomial", "negative binomial" and "poisson"
+#' "binomial", "negative binomial" and "poisson".
 #' @param rho A number in (0, 1). The probability 1-rho represents the minimum 
-#' confidence level
-#' @param a A positive real number representing the lower bound of the interval (a, b)
-#' @param b A positive real number representing the upper bound of the interval (a, b)
+#' confidence level.
+#' @param a A positive real number representing the lower bound of the interval (a, b).
+#' @param b A positive real number representing the upper bound of the interval (a, b).
 #' @param ea A positive real number representing the maximum admissible absolute estimation 
-#' error
+#' error.
 #' @param er A positive real number representing the maximum admissible relative estimation 
-#' error
+#' error.
 #' @param w A positive real number representing the aliquot volume (only available for 
-#' negative binomial distribution). Default is NULL
+#' negative binomial distribution). Default is NULL.
 #' @param phi A positive real number representing the shape parameter for negative 
-#' binomial distribution. Default is NULL
+#' binomial distribution. Default is NULL.
 #' @param n0 A positive integer representing the initial sample size in which the function 
 #' will check the criterion. Default is 2.
 #' @param lag A positive integer representing the increment which 'n' receives until reach
 #' the criterion. Default is 1.
 #'
-#' @return An integer representing the sample size
+#' @return An integer representing the sample size.
 #' 
 #' @references Costa, E. G., Lopes, R. M. & Singer, J. M. (2016). Sample size for estimating 
 #' the mean concentration of organisms in ballast water. Journal of Environmental Management 
@@ -216,4 +216,5 @@ ss.ee <- function(dist, rho, a, b, ea = NULL, er = NULL, w = NULL, phi = NULL,
   cat("\nSample size:\n")
   print(matrix(c(sizes, 1 - rho), length(sizes), 2, 
                dimnames = list(rep("  ", length(sizes)), c(" n", " 1-rho"))))
+  cat("\n")
 } 

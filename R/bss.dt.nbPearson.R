@@ -24,7 +24,7 @@
 #' @export
 #'
 #' @examples
-bss.dt.nbpearson <- function(lf, lam0, theta0, phi, w, c, rho = NULL, gam = NULL, nmax = 1E2,
+bss.dt.nbPearson <- function(lf, lam0, theta0, phi, w, c, rho = NULL, gam = NULL, nmax = 1E2,
                              nrep = 1E1, lrep = 5E1, plot = TRUE, ...) {
   cl <- match.call()
   ns <- seq(1, nmax, by = 5)
@@ -90,5 +90,5 @@ bss.dt.nbpearson <- function(lf, lam0, theta0, phi, w, c, rho = NULL, gam = NULL
   cat("\nCall:\n")
   print(cl)
   cat("\nSample size:\n")
-  cat("n  = ", nmin)
+  cat("n  = ", nmin, "\n")
 }

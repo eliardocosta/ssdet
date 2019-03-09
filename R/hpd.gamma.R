@@ -1,11 +1,11 @@
 #' Compute the HPD interval for the posterior distribution of the Poisson/gamma model
 #'
-#' @param kappa Fist parameter of the posterior distribution
-#' @param psi Second parameter of the posterior distribution
-#' @param rho Probability of the HPD interval
-#' @param len Length of the HPD interval
+#' @param kappa Fist parameter of the posterior distribution.
+#' @param psi Second parameter of the posterior distribution.
+#' @param rho Probability of the HPD interval.
+#' @param len Length of the HPD interval.
 #'
-#' @return Two number representing the HPD interval
+#' @return Two number representing the HPD interval.
 #' 
 #' @noRd
 #'

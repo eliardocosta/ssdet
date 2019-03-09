@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-bss.ci.poidp <- function(crit, lam0, theta0, w, rho, alpha, len = NULL, len.max = NULL, 
+bss.ci.PoiDP <- function(crit, lam0, theta0, w, rho, alpha, len = NULL, len.max = NULL, 
                      eps = NULL, cgrid = 1E-2, R = 1E2, n0 = 2, inc = c(1E2, 1E1, 5)) {
   cl <- match.call()
   if (crit == "ACC") { 
@@ -89,5 +89,5 @@ bss.ci.poidp <- function(crit, lam0, theta0, w, rho, alpha, len = NULL, len.max 
   cat("\nCall:\n")
   print(cl)
   cat("\nSample size:\n")
-  cat("n  = ", n)
+  cat("n  = ", n, "\n")
 } 

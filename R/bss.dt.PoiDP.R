@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-bss.dt.poidp <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 1E2, 
+bss.dt.PoiDP <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 1E2, 
                      plot = TRUE, ...) {
   cl <- match.call()
   ns <- seq(3, nmax, by = 5)
@@ -50,5 +50,5 @@ bss.dt.poidp <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 
   cat("\nCall:\n")
   print(cl)
   cat("\nSample size:\n")
-  cat("n  = ", nmin)
+  cat("n  = ", nmin, "\n")
 }

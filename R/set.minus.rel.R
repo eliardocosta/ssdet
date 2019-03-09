@@ -1,18 +1,18 @@
 #' The element $c_{-}$ which is in the set S in relative case
 #'
 #' @param dist A characther string specifying the probability distribution. Distributions 
-#' "binomial", "negative binomial" and "poisson"
-#' @param a A positive real number representing the lower bound of the interval (a, b)
-#' @param b A positive real number representing the upper bound of the interval (a, b)
-#' @param n A positive interger representing the sample size
+#' "binomial", "negative binomial" and "poisson".
+#' @param a A positive real number representing the lower bound of the interval (a, b).
+#' @param b A positive real number representing the upper bound of the interval (a, b).
+#' @param n A positive interger representing the sample size.
 #' @param e A positive real number representing the maximum admissible relative estimation 
-#' error
+#' error.
 #' @param w A positive real number representing the aliquot volume (only available for 
-#' negative binomial distribution)
+#' negative binomial distribution).
 #' @param phi A positive real number representing the shape parameter for negative 
-#' binomial distribution
+#' binomial distribution.
 #'
-#' @return A set of probabilities
+#' @return A set of probabilities.
 #' 
 #' @noRd
 #'

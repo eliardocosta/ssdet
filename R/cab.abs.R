@@ -1,17 +1,17 @@
 #' The element $c_a$ or $c_b$ which is in the set S in absolute case
 #'
 #' @param dist A characther string specifying the probability distribution. Distributions 
-#' "binomial", "negative binomial" and "poisson"
-#' @param ab A positive real number. The bound of the interval (a, b). Input 'a' or 'b'
-#' @param n A positive interger representing the sample size
+#' "binomial", "negative binomial" and "poisson".
+#' @param ab A positive real number. The bound of the interval (a, b). Input 'a' or 'b'.
+#' @param n A positive interger representing the sample size.
 #' @param e A positive real number representing the maximum admissible absolute estimation 
-#' error
+#' error.
 #' @param w A positive real number representing the aliquot volume (only available for 
-#' negative binomial distribution)
+#' negative binomial distribution).
 #' @param phi A positive real number representing the shape parameter for negative 
-#' binomial distribution
+#' binomial distribution.
 #'
-#' @return A probability
+#' @return A probability.
 #' 
 #' @noRd
 #'
