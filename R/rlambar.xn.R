@@ -15,7 +15,7 @@ rlambar.xn <- function(N, alpha, x, w, lam0, theta0) {
   Z <- rnu(nsam = N, x = x, w = w, lam0 = lam0, theta0 = theta0, alpha = alpha)
   D <- rdiri(N = N, k = length(x))
   lam <- rlambar(N = N, alpha = alpha, lam0 = lam0, theta0 = theta0)
-  B <- rbeta(N, alpha, length(x))
+  B <- stats::rbeta(N, alpha, length(x))
   output <- B*lam + (1 - B)*apply(D*Z, 1, sum)
   return(output)
 }

@@ -10,7 +10,7 @@
 rdiri <- function(N, k) {
   output <- matrix(NA, N, k)
   for (i in 1:N) {
-    D <- rgamma(k, shape = 1, rate = 1)
+    D <- stats::rgamma(k, shape = 1, rate = 1)
     output[i, ] <- D/sum(D)
   }
   return(output)

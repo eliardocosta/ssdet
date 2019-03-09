@@ -14,19 +14,19 @@
 #' 
 rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 1E3) {
   n <- length(x)
-  lam <- round(rgamma(n, shape = theta0, rate = theta0/lam0), 3)
+  lam <- round(stats::rgamma(n, shape = theta0, rate = theta0/lam0), 3)
   output <- matrix(NA, nsam, n)
   nclu <- length(lam)
   nite <- nsam + nburn
   for (t in 1:nite) {
     for (i in 1:n) { 
-      q0 <- alpha*dnbinom(x[i], mu = w*lam0, size = theta0)
-      qk <- dpois(x[i], lambda = w*lam[-i])
+      q0 <- alpha*stats::dnbinom(x[i], mu = w*lam0, size = theta0)
+      qk <- stats::dpois(x[i], lambda = w*lam[-i])
       cn <- q0 + sum(qk) # normalization constant
       q0n <- q0/cn
       qkn <- qk/cn
-      u <- runif(1)
-      lam[i] <- ifelse(u <= q0n, rgamma(1, shape = theta0 + x[i], rate = (w + theta0/lam0)),
+      u <- stats::runif(1)
+      lam[i] <- ifelse(u <= q0n, stats::rgamma(1, shape = theta0 + x[i], rate = (w + theta0/lam0)),
                        sample(x = lam[-i], size = 1, prob = qkn))
     }
     lam <- round(lam, 3)
@@ -41,7 +41,7 @@ rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 1E3) {
       S <- append(S, which(lam[i] == lam.star))
     }
     for (i in 1:length(n.star)) {
-      lam[which(S == i)] <- rgamma(1, shape = theta0 + sum(x[which(S == i)]), rate = n.star[i] + theta0/lam0)
+      lam[which(S == i)] <- stats::rgamma(1, shape = theta0 + sum(x[which(S == i)]), rate = n.star[i] + theta0/lam0)
     }
   }
   return(output)

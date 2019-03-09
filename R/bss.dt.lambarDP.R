@@ -32,7 +32,7 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
       for (i in 1:nrep) {
         loss <- numeric()
         for (j in 1:lrep) {
-          x <- rnbinom(n, mu = w*lam0, size = theta0)
+          x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
           lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
                                theta0 = theta0)
           qs <- quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
@@ -46,7 +46,7 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
       for (i in 1:nrep) {
         loss <- numeric()
         for (j in 1:lrep) {
-          x <- rnbinom(n, mu = w*lam0, size = theta0)
+          x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
           lam.xn <- rlambar.xn(N = 5E1, alpha = alpha, x = x, w = w, lam0 = lam0, 
                                theta0 = theta0)
           loss <- append(loss, 2*sqrt(gam*var(lam.xn)) + c*n)
@@ -56,7 +56,7 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
     }
   }
   Y <- log(risk - c*rep(ns, each = nrep))
-  mod <- lm(Y ~ I(log(rep(ns + 1, each = nrep))))
+  mod <- stats::lm(Y ~ I(log(rep(ns + 1, each = nrep))))
   E <- as.numeric(exp(mod$coef[1]))
   G <- as.numeric(-mod$coef[2])
   nmin <- ceiling((E*G/c)^(1/(G + 1))-1)
@@ -64,7 +64,7 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
     plot(rep(ns, each = nrep), risk, xlim = c(0, nmax), xlab = "n", ylab = "TC(n)")
     curve <- function(x) {c*x + E/(1 + x)^G}
     plot(function(x)curve(x), 0, nmax, col = "blue", add = TRUE)
-    abline(v = nmin, col = "red")
+    graphics::abline(v = nmin, col = "red")
   }
   # Output
   cat("\nCall:\n")

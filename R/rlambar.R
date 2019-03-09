@@ -13,14 +13,14 @@
 rlambar <- function(N, alpha, lam0, theta0, eps = 5E-2) {
   output <- numeric()
   for (i in 1:N) {
-    B <- rbeta(1, 1, alpha)
-    xi <- rgamma(1, shape = theta0, rate = theta0/lam0)
+    B <- stats::rbeta(1, 1, alpha)
+    xi <- stats::rgamma(1, shape = theta0, rate = theta0/lam0)
     ulam <- B*xi + (1 - B)*.Machine$double.xmax
     llam <- B*xi
     j <- 1
     while (abs(ulam - llam) > eps) {
-      B <- rbeta(1, 1, alpha)
-      xi <- rgamma(1, shape = theta0, rate = theta0/lam0)
+      B <- stats::rbeta(1, 1, alpha)
+      xi <- stats::rgamma(1, shape = theta0, rate = theta0/lam0)
       ulam <- B*xi + (1 - B)*ulam
       llam <- B*xi + (1 - B)*llam
       j <- j + 1

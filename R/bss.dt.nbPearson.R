@@ -76,7 +76,7 @@ bss.dt.nbPearson <- function(lf, lam0, theta0, phi, w, c, rho = NULL, gam = NULL
     }
   }
   Y <- log(risk - c*rep(ns, each = nrep))
-  mod <- lm(Y ~ I(log(rep(ns + 1, each = nrep))))
+  mod <- stats::lm(Y ~ I(log(rep(ns + 1, each = nrep))))
   E <- as.numeric(exp(mod$coef[1]))
   G <- as.numeric(-mod$coef[2])
   nmin <- ceiling((E*G/c)^(1/(G + 1))-1)
@@ -84,7 +84,7 @@ bss.dt.nbPearson <- function(lf, lam0, theta0, phi, w, c, rho = NULL, gam = NULL
     plot(rep(ns, each = nrep), risk, xlim = c(0, nmax), xlab = "n", ylab = "TC(n)")
     curve <- function(x) {c*x + E/(1 + x)^G}
     plot(function(x)curve(x), 0, nmax, col = "blue", add = TRUE)
-    abline(v = nmin, col = "red")
+    graphics::abline(v = nmin, col = "red")
   }
   # Output
   cat("\nCall:\n")

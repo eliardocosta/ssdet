@@ -26,7 +26,7 @@ bss.dt.PoiDP <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 
       for (i in 1:nrep) {
         loss <- numeric()
         for (j in 1:R) {
-          x <- rnbinom(n, mu = w*lam0, size = theta0)
+          x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
           obj.vpost <- var.postDPmix(x = x, w = w, lam0 = lam0, theta0 = theta0, 
                                      alpha = alpha)
           loss <- append(loss, sum(obj.vpost$varp*dnorm(obj.vpost$lam, mean = 10, 
@@ -36,7 +36,7 @@ bss.dt.PoiDP <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 
       }
     }
   Y <- log(risk - c*rep(ns, each = nrep))
-  mod <- lm(Y ~ I(log(rep(ns + 1, each = nrep))))
+  mod <- stats::lm(Y ~ I(log(rep(ns + 1, each = nrep))))
   E <- as.numeric(exp(mod$coef[1]))
   G <- as.numeric(-mod$coef[2])
   nmin <- ceiling((E*G/c)^(1/(G + 1)) - 1)
@@ -44,7 +44,7 @@ bss.dt.PoiDP <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 
     plot(rep(ns, each = nrep), risk, xlim = c(0, nmax), xlab = "n", ylab = "TC(n)")
     curve <- function(x) {c*x + E/(1 + x)^G}
     plot(function(x)curve(x), 0, nmax, col = "blue", add = TRUE)
-    abline(v = nmin, col = "red")
+    graphics::abline(v = nmin, col = "red")
   }
   # Output
   cat("\nCall:\n")

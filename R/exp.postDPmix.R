@@ -20,9 +20,9 @@ exp.postDPmix <- function(x = x, w = w, lam0 = lam0, theta0 = theta0, alpha = al
   probs[ ,1] <- rep(0, nsam)
   for (i in 1:nsam) {
     for (j in 2:length(grid)) {
-      probs[i, j] <- (alpha/(alpha + n))*pgamma(grid[j], shape = theta0, rate = theta0/lam0)+
+      probs[i, j] <- (alpha/(alpha + n))*stats::pgamma(grid[j], shape = theta0, rate = theta0/lam0)+
         (1/(alpha + n))*(length(which(samcon.lam[i, ] <= grid[j])))
     }
   }
   return(list(lam = grid, cumprob = apply(probs, 2, mean), cgrid = cgrid))
-} # END
+} 

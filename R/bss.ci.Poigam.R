@@ -20,8 +20,8 @@
 #' @return An integer representing the sample size.
 #' @export
 #'
-bss.ci.Poigam <- function(crit, lam0, theta0, w, rho, len = NULL, len.max = NULL, 
-                          R = 1E3, n0 = 1) {
+bss.ci.Poigam <- function(crit, lam0, theta0, w, rho, len = NULL, len.max = NULL, R = 1E3, 
+                          n0 = 1) {
   cl <- match.call()
   if (crit == "ALCAprox") {
     zrho <- stats::qnorm(1 - rho/2)
@@ -47,7 +47,7 @@ bss.ci.Poigam <- function(crit, lam0, theta0, w, rho, len = NULL, len.max = NULL
   if (crit == "ALC") { 
     len <- len.max + 1
     n <- n0
-    while (base::mean(len) > len.max) {
+    while (mean(len) > len.max) {
       n <- n + 1
       len <- numeric()
       for (i in 1:R) {
