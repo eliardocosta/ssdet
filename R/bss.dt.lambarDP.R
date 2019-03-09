@@ -18,7 +18,7 @@
 #' curve.
 #' @param ... Currently ignored.
 #'
-#' @return
+#' @return An integer representing the sample size.
 #' @export
 #'
 bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NULL, 
