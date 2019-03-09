@@ -17,7 +17,7 @@ rlambar.xn(N, alpha, x, w, lam0, theta0)
 
 \item{lam0}{A positive real number representing a hyperparameter of the $F_0$ base distribution.}
 
-\item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.}
+\item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.}
 }
 \value{
 A random sample of the posterior functional mean of the Poisson/Dirichlet process.

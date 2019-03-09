@@ -10,11 +10,11 @@ bss.dt.lambarDP(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NULL,
 \arguments{
 \item{lf}{1 or 2, representing the loss function used.}
 
-\item{alpha}{}
+\item{alpha}{Shape parameter of the Dirichlet process.}
 
 \item{lam0}{A positive real number representing a hyperparameter of the $F_0$ base distribution.}
 
-\item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.}
+\item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.}
 
 \item{w}{A positive real number representing the aliquot volume.}
 

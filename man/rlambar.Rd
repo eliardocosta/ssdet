@@ -13,7 +13,7 @@ rlambar(N, alpha, lam0, theta0, eps = 0.05)
 
 \item{lam0}{A positive real number representing a hyperparameter of the $F_0$ base distribution.}
 
-\item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.}
+\item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.}
 
 \item{eps}{Tolerance limit used in the simulation algorithm.}
 }
