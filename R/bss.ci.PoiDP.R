@@ -2,7 +2,7 @@
 #'
 #' @param crit A characther string specifying the criterion. Criteria: "ACC" and "ALC".
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution.
-#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.
+#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.
 #' @param w A positive real number representing the aliquot volume.
 #' @param rho A number in (0, 1). The probability of the credible interval is equal or
 #' greater than $1-rho$ depending on the criterion used.
@@ -21,7 +21,6 @@
 #' @return An integer representing the sample size.
 #' @export
 #'
-#' @examples
 bss.ci.PoiDP <- function(crit, lam0, theta0, w, rho, alpha, len = NULL, len.max = NULL, 
                      eps = NULL, cgrid = 1E-2, R = 1E2, n0 = 2, inc = c(1E2, 1E1, 5)) {
   cl <- match.call()

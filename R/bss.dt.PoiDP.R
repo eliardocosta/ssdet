@@ -1,7 +1,7 @@
 #' Bayesian sample size in a decision-theoretic approach for the Poisson/Dirichlet process.
 #'
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution.
-#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.
+#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.
 #' @param alpha Shape parameter of the Dirichlet process.
 #' @param w A positive real number representing the aliquot volume.
 #' @param c A positive real number representing the cost of colect one aliquot.
@@ -16,7 +16,6 @@
 #' @return An integer representing the sample size.
 #' @export
 #'
-#' @examples
 bss.dt.PoiDP <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 1E2, 
                      plot = TRUE, ...) {
   cl <- match.call()

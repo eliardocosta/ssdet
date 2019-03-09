@@ -13,5 +13,6 @@ URL: https://github.com/eliardocosta/ssdet
 BugReports: https://github.com/eliardocosta/ssdet/issues
 Encoding: UTF-8
 LazyData: true
-Imports: rootSolve
+Imports: rootSolve,
+    PearsonDS
 RoxygenNote: 6.0.1

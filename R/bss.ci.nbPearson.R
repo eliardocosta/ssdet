@@ -14,7 +14,6 @@
 #' @return An integer representing the sample size.
 #' @export
 #'
-#' @examples
 bss.ci.nbPearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, len.max = NULL, 
                              R = 1E3, n0 = 1) {
   cl <- match.call()

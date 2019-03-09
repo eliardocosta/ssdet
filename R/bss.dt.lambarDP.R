@@ -21,7 +21,6 @@
 #' @return
 #' @export
 #'
-#' @examples
 bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NULL, 
                             nmax = 1E2, nrep = 1E1, lrep = 5E1, plot = FALSE, ...) {
   cl <- match.call()

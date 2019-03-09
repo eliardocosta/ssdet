@@ -9,7 +9,6 @@
 #' @return A random sample of the functional mean of the Dirichlet process.
 #' @export
 #'
-#' @examples
 rlambar <- function(N, alpha, lam0, theta0, eps = 5E-2) {
   output <- numeric()
   for (i in 1:N) {

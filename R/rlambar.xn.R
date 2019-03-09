@@ -10,7 +10,6 @@
 #' @return A random sample of the posterior functional mean of the Poisson/Dirichlet process.
 #' @export
 #'
-#' @examples 
 rlambar.xn <- function(N, alpha, x, w, lam0, theta0) {
   Z <- rnu(nsam = N, x = x, w = w, lam0 = lam0, theta0 = theta0, alpha = alpha)
   D <- rdiri(N = N, k = length(x))

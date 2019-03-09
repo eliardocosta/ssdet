@@ -23,7 +23,6 @@
 #' @return An integer representing the sample size.
 #' @export
 #'
-#' @examples
 bss.dt.nbPearson <- function(lf, lam0, theta0, phi, w, c, rho = NULL, gam = NULL, nmax = 1E2,
                              nrep = 1E1, lrep = 5E1, plot = TRUE, ...) {
   cl <- match.call()
