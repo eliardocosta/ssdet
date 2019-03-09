@@ -1,9 +1,9 @@
 #' Bayesian sample size in a decision-theoretic approach for the functional mean of the Dirichlet process with a gamma distribution as the $F_0$ base distribution.
 #'
 #' @param lf 1 or 2, representing the loss function used.
-#' @param alpha 
+#' @param alpha Shape parameter of the Dirichlet process.
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution. 
-#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.
+#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.
 #' @param w A positive real number representing the aliquot volume.
 #' @param c A positive real number representing the cost of colect one aliquot.
 #' @param rho A number in (0, 1). The probability of the credible interval is $1-rho$. Only
@@ -34,7 +34,7 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
           x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
           lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
                                theta0 = theta0)
-          qs <- quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
+          qs <- stats::quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
           loss <- append(loss, mean(lam.xn[which(lam.xn > qs[2])]) - mean(lam.xn[which(lam.xn < qs[1])]) + c*n) 
         }
         risk <- append(risk, mean(loss))
@@ -48,7 +48,7 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
           x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
           lam.xn <- rlambar.xn(N = 5E1, alpha = alpha, x = x, w = w, lam0 = lam0, 
                                theta0 = theta0)
-          loss <- append(loss, 2*sqrt(gam*var(lam.xn)) + c*n)
+          loss <- append(loss, 2*sqrt(gam*stats::var(lam.xn)) + c*n)
         }
         risk <- append(risk, mean(loss))
       }

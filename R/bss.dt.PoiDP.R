@@ -28,7 +28,7 @@ bss.dt.PoiDP <- function(lam0, theta0, alpha, w, c, nmax = 1E2, nrep = 1E1, R = 
           x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
           obj.vpost <- var.postDPmix(x = x, w = w, lam0 = lam0, theta0 = theta0, 
                                      alpha = alpha)
-          loss <- append(loss, sum(obj.vpost$varp*dnorm(obj.vpost$lam, mean = 10, 
+          loss <- append(loss, sum(obj.vpost$varp*stats::dnorm(obj.vpost$lam, mean = 10, 
                                                         sd = 1E1)) + c*n)
         }
         risk <- append(risk, mean(loss))

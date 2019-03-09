@@ -3,7 +3,7 @@
 #' @param N Number of observations.
 #' @param alpha Shape parameter of the Dirichlet process.
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution. 
-#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.
+#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.
 #' @param eps Tolerance limit used in the simulation algorithm.
 #'
 #' @return A random sample of the functional mean of the Dirichlet process.

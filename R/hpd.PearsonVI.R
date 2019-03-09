@@ -32,7 +32,7 @@ hpd.PearsonVI <- function(kappa, psi, phi, w, len = NULL, rho = NULL) {
     fun <- function(x) {
       (kappa - 1)*log(1 + len/x) - (kappa + psi)*log(1 + w*len/(phi + w*x))
     }
-    sol <- uniroot(fun, lower = 1E-1, upper = 1E2, extendInt = "downX")
+    sol <- stats::uniroot(fun, lower = 1E-1, upper = 1E2, extendInt = "downX")
     roots <- c(sol$root, sol$root + len)
   }
   return(roots)

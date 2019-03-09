@@ -5,7 +5,7 @@
 #' @param x Observed counts of the Poisson distribution of the model.
 #' @param w A positive real number representing the aliquot volume.
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution. 
-#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $\lam_0$ and shape parameter $\theta_0$.
+#' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.
 #'
 #' @return A random sample of the posterior functional mean of the Poisson/Dirichlet process.
 #' @export

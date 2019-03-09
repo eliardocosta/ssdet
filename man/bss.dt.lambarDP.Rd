@@ -38,6 +38,9 @@ curve.}
 
 \item{...}{Currently ignored.}
 }
+\value{
+An integer representing the sample size.
+}
 \description{
 Bayesian sample size in a decision-theoretic approach for the functional mean of the Dirichlet process with a gamma distribution as the $F_0$ base distribution.
 }

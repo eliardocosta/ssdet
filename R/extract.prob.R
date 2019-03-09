@@ -7,8 +7,8 @@
 #' @noRd
 #' 
 extract.prob <- function(obj) { 
-  grid.val <- filter(obj$lam, rep(1/2, 2)) 
-  grid.val <- as.numeric(head(grid.val, -1))
+  grid.val <- stats::filter(obj$lam, rep(1/2, 2)) 
+  grid.val <- as.numeric(utils::head(grid.val, -1))
   prob <- numeric()
   for (i in 2:length(obj$cumprob)) {
     prob[i] <- obj$cumprob[i]-obj$cumprob[i-1]

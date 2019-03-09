@@ -32,7 +32,7 @@ bss.ci.PoiDP <- function(crit, lam0, theta0, w, rho, alpha, len = NULL, len.max 
         n <- n + inc[i]
         cov <- numeric()
         for (j in 1:R) {
-          x <- rnbinom(n, mu = w*lam0, size = theta0)
+          x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
           obj.ppost <- exp.postDPmix(x = x, w = w, lam0 = lam0, theta0 = theta0, 
                                      alpha = alpha, cgrid = cgrid)
           obj.dpost <- extract.prob(obj.ppost)
