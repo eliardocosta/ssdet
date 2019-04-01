@@ -35,7 +35,7 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
           lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
                                theta0 = theta0)
           qs <- stats::quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
-          loss <- append(loss, mean(lam.xn[which(lam.xn > qs[2])]) - mean(lam.xn[which(lam.xn < qs[1])]) + c*n) 
+          loss <- append(loss, sum(lam.xn[which(lam.xn > qs[2])])/1E2 - sum(lam.xn[which(lam.xn < qs[1])])/1E2 + c*n) 
         }
         risk <- append(risk, mean(loss))
       }
