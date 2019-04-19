@@ -24,45 +24,42 @@
 bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NULL, 
                             nmax = 1E2, nrep = 1E1, lrep = 5E1, plot = FALSE, ...) {
   cl <- match.call()
-  ns <- seq(3, nmax, by = 5)
-  risk <- numeric()
+  ns <- rep(seq(3, nmax, by = 10), each = nrep)
   if (lf == 1) {
-    for (n in ns) {
-      for (i in 1:nrep) {
-        loss <- numeric()
-        for (j in 1:lrep) {
-          x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
-          lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
-                               theta0 = theta0)
-          qs <- stats::quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
-          loss <- append(loss, sum(lam.xn[which(lam.xn > qs[2])])/1E2 - sum(lam.xn[which(lam.xn < qs[1])])/1E2 + c*n) 
-        }
-        risk <- append(risk, mean(loss))
-      }
-    }
+    risk <- sapply(ns, function(n) {
+      loss <- sapply(seq_len(lrep), function(j) {
+        x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
+        lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
+                             theta0 = theta0)
+        qs <- stats::quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
+        out.loss <- sum(lam.xn[which(lam.xn > qs[2])])/1E2 - sum(lam.xn[which(lam.xn < qs[1])])/1E2 + c*n
+        return(out.loss)
+      })
+      out.risk <- mean(loss)
+      return(out.risk)
+    })
   } else if (lf == 2) {
-    for (n in ns) {
-      for (i in 1:nrep) {
-        loss <- numeric()
-        for (j in 1:lrep) {
-          x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
-          lam.xn <- rlambar.xn(N = 5E1, alpha = alpha, x = x, w = w, lam0 = lam0, 
-                               theta0 = theta0)
-          loss <- append(loss, 2*sqrt(gam*stats::var(lam.xn)) + c*n)
-        }
-        risk <- append(risk, mean(loss))
-      }
-    }
+    risk <- sapply(ns, function(n) {
+      loss <- sapply(seq_len(lrep), function(j) {
+        x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
+        lam.xn <- rlambar.xn(N = 5E1, alpha = alpha, x = x, w = w, lam0 = lam0, 
+                             theta0 = theta0)
+        out.loss <- 2*sqrt(gam*stats::var(lam.xn)) + c*n
+        return(out.loss)
+      })
+      out.risk <- mean(loss)
+      return(out.risk)
+    })
   }
-  Y <- log(risk - c*rep(ns, each = nrep))
-  mod <- stats::lm(Y ~ I(log(rep(ns + 1, each = nrep))))
-  E <- as.numeric(exp(mod$coef[1]))
-  G <- as.numeric(-mod$coef[2])
+  Y <- log(risk - c*ns)
+  fit <- stats::lm(Y ~ I(log(ns + 1)))
+  E <- as.numeric(exp(fit$coef[1]))
+  G <- as.numeric(-fit$coef[2])
   nmin <- ceiling((E*G/c)^(1/(G + 1))-1)
   if (plot == TRUE) {
-    plot(rep(ns, each = nrep), risk, xlim = c(0, nmax), xlab = "n", ylab = "TC(n)")
+    plot(ns, risk, xlim = c(0, nmax), xlab = "n", ylab = "TC(n)")
     curve <- function(x) {c*x + E/(1 + x)^G}
-    plot(function(x)curve(x), 0, nmax, col = "blue", add = TRUE)
+    plot(function(x) curve(x), 0, nmax, col = "blue", add = TRUE)
     graphics::abline(v = nmin, col = "red")
   }
   # Output

@@ -1,6 +1,6 @@
 Package: ssdet
 Title: Sample size determination in frequentist and Bayesian approaches
-Version: 0.0.0.9100
+Version: 0.0.0.9200
 Authors@R: c(
             person("Eliardo G.", "Costa", email = "eliardocosta@ccet.ufrn.br", role = c("aut", "cre", "cph")),
             person("Julio M.", "Singer", email = "jmsinger@ime.usp.br", role = c("ths", "cph")),
@@ -14,5 +14,8 @@ BugReports: https://github.com/eliardocosta/ssdet/issues
 Encoding: UTF-8
 LazyData: true
 Imports: rootSolve,
-    PearsonDS
+    PearsonDS,
+    foreach,
+    doParallel,
+    parallel
 RoxygenNote: 6.0.1

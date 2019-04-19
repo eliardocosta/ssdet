@@ -5,26 +5,26 @@
 #' @param lam0 A positive real number representing a hyperparameter of the $F_0$ base distribution. 
 #' @param theta0 A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.
 #' @param eps Tolerance limit used in the simulation algorithm.
+#' @param ncore Number of cores to use in parallel computin. If NULL the function uses 1 core if there is only one core, if there is more than one cores uses one half of the cores.
 #'
 #' @return A random sample of the functional mean of the Dirichlet process.
 #' @export
 #'
-rlambar <- function(N, alpha, lam0, theta0, eps = 5E-2) {
-  output <- numeric()
-  for (i in 1:N) {
-    B <- stats::rbeta(1, 1, alpha)
-    xi <- stats::rgamma(1, shape = theta0, rate = theta0/lam0)
-    ulam <- B*xi + (1 - B)*.Machine$double.xmax
-    llam <- B*xi
-    j <- 1
-    while (abs(ulam - llam) > eps) {
-      B <- stats::rbeta(1, 1, alpha)
-      xi <- stats::rgamma(1, shape = theta0, rate = theta0/lam0)
-      ulam <- B*xi + (1 - B)*ulam
-      llam <- B*xi + (1 - B)*llam
-      j <- j + 1
-    }
-    output <- append(output, ulam)
+rlambar <- function(N, alpha, lam0, theta0, eps = 1E-1, ncore = NULL) {
+  B <- stats::rbeta(1, 1, alpha)
+  xi <- stats::rgamma(1, shape = theta0, rate = theta0/lam0)
+  ulam <- B*xi + (1 - B)*.Machine$double.xmax
+  llam <- B*xi
+  if (is.null(ncore)) {
+    num.cores <- ceiling(parallel::detectCores()/2)
+  } else {
+    num.cores <- ncore
   }
-  return(output)
-} 
+  doParallel::registerDoParallel(num.cores)
+  out.lambar <- foreach::foreach (i = 1:N, .combine = 'c') %dopar% {
+    lam.moller.alg(llam = llam, ulam = ulam, eps = eps, alpha = alpha, lam0 = lam0, 
+                   theta0 = theta0)
+    }
+  doParallel::stopImplicitCluster()
+  return(out.lambar)
+}

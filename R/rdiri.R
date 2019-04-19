@@ -7,11 +7,7 @@
 #' 
 #' @noRd
 #'
-rdiri <- function(N, k) {
-  output <- matrix(NA, N, k)
-  for (i in 1:N) {
-    D <- stats::rgamma(k, shape = 1, rate = 1)
-    output[i, ] <- D/sum(D)
-  }
-  return(output)
+rdiri <- function(N, k) { 
+  out.diri <- matrix(stats::rgamma(N*k, shape = 1, rate = 1 ), ncol = k, byrow = TRUE)
+  return(out.diri/apply(out.diri, 1, sum))
 }

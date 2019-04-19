@@ -12,37 +12,60 @@
 #'
 #' @noRd
 #' 
-rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 1E3) {
+rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 5E2) {
   n <- length(x)
   lam <- round(stats::rgamma(n, shape = theta0, rate = theta0/lam0), 3)
-  output <- matrix(NA, nsam, n)
-  nclu <- length(lam)
-  nite <- nsam + nburn
-  for (t in 1:nite) {
-    for (i in 1:n) { 
+  out.nu <- matrix(nrow = nsam, ncol = n)
+  for (t in seq_len(nburn)) {
+    lam <- sapply(seq_len(n), function(i) {
       q0 <- alpha*stats::dnbinom(x[i], mu = w*lam0, size = theta0)
       qk <- stats::dpois(x[i], lambda = w*lam[-i])
       cn <- q0 + sum(qk) # normalization constant
       q0n <- q0/cn
       qkn <- qk/cn
       u <- stats::runif(1)
-      lam[i] <- ifelse(u <= q0n, stats::rgamma(1, shape = theta0 + x[i], rate = (w + theta0/lam0)),
-                       sample(x = lam[-i], size = 1, prob = qkn))
-    }
-    lam <- round(lam, 3)
-    if (t > nburn) {
-      output[t - nburn, ] <- lam
-    } 
+      if (u <= q0n) {
+        lam[i] <- stats::rgamma(1, shape = theta0 + x[i], rate = (w + theta0/lam0))
+      } else {
+        lam[i] <- sample(x = lam[-i], size = 1, prob = qkn)
+      }
+      return(lam[i])
+    })
     lam.table <- as.data.frame(table(lam), stringsAsFactors = FALSE)
-    lam.star <- as.vector(lam.table[, 1], mode = "numeric")
-    n.star <- as.vector(lam.table[, 2])
-    S <- numeric()
-    for (i in 1:n) {
-      S <- append(S, which(lam[i] == lam.star))
-    }
-    for (i in 1:length(n.star)) {
-      lam[which(S == i)] <- stats::rgamma(1, shape = theta0 + sum(x[which(S == i)]), rate = n.star[i] + theta0/lam0)
+    lam.star <- as.vector(lam.table[['lam']], mode = "numeric")
+    n.star <- lam.table[['Freq']] 
+    S.set <- numeric(n)
+    S.set <- sapply(seq_len(n), function(i) which(lam[i] == lam.star))
+    for (i in seq_len(length(n.star))) {
+      lam[which(S.set == i)] <- stats::rgamma(1, shape = theta0 + sum(x[which(S.set == i)]), 
+                                              rate = n.star[i] + theta0/lam0)
     }
   }
-  return(output)
-} 
+  for (t in seq_len(nsam)) {
+    lam <- sapply(seq_len(n), function(i) {
+      q0 <- alpha*stats::dnbinom(x[i], mu = w*lam0, size = theta0)
+      qk <- stats::dpois(x[i], lambda = w*lam[-i])
+      cn <- q0 + sum(qk) # normalization constant
+      q0n <- q0/cn
+      qkn <- qk/cn
+      u <- stats::runif(1)
+      if (u <= q0n) {
+        lam[i] <- stats::rgamma(1, shape = theta0 + x[i], rate = (w + theta0/lam0))
+      } else {
+        lam[i] <- sample(x = lam[-i], size = 1, prob = qkn)
+      }
+      return(lam[i])
+    })
+    lam.table <- as.data.frame(table(lam), stringsAsFactors = FALSE)
+    lam.star <- as.vector(lam.table[['lam']], mode = "numeric")
+    n.star <- lam.table[['Freq']] 
+    S.set <- numeric(n)
+    S.set <- sapply(seq_len(n), function(i) which(lam[i] == lam.star))
+    for (i in seq_len(length(n.star))) {
+      lam[which(S.set == i)] <- stats::rgamma(1, shape = theta0 + sum(x[which(S.set == i)]), 
+                                              rate = n.star[i] + theta0/lam0)
+    }
+    out.nu[t, ] <- lam
+  }
+  return(out.nu)
+}
