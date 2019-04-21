@@ -12,25 +12,28 @@
 #' function 2.
 #' @param nmax A positive integer representing the maximum number for compute the Bayes risk.
 #' Default is 100.
+#' @param nlag A positive integer representing the lag in the n's used to compute the Bayes risk. Default is 10.
 #' @param nrep A positive integer representing the number of samples taken for each $n$.
 #' @param lrep A positive integer representing the number of samples taken for $S_n$. Default is 50.
 #' @param plot Boolean. If TRUE (default) it plot the estimated Bayes risks and the fitted
 #' curve.
+#' @param ncore Number of cores to use in parallel computin. If NULL the function uses 1 core if there is only one core, if there is more than one cores uses one half of the cores.
 #' @param ... Currently ignored.
 #'
 #' @return An integer representing the sample size.
 #' @export
 #'
 bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NULL, 
-                            nmax = 1E2, nrep = 1E1, lrep = 5E1, plot = FALSE, ...) {
+                            nmax = 1E2, nlag = 10, nrep = 1E1, lrep = 5E1, plot = FALSE, 
+                            ncore = NULL, ...) {
   cl <- match.call()
-  ns <- rep(seq(3, nmax, by = 10), each = nrep)
+  ns <- rep(seq(3, nmax, by = nlag), each = nrep)
   if (lf == 1) {
     risk <- sapply(ns, function(n) {
       loss <- sapply(seq_len(lrep), function(j) {
         x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
         lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
-                             theta0 = theta0)
+                             theta0 = theta0, ncore = ncore)
         qs <- stats::quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
         out.loss <- sum(lam.xn[which(lam.xn > qs[2])])/1E2 - sum(lam.xn[which(lam.xn < qs[1])])/1E2 + c*n
         return(out.loss)
@@ -42,13 +45,13 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
     risk <- sapply(ns, function(n) {
       loss <- sapply(seq_len(lrep), function(j) {
         x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
-        lam.xn <- rlambar.xn(N = 5E1, alpha = alpha, x = x, w = w, lam0 = lam0, 
-                             theta0 = theta0)
+        lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
+                             theta0 = theta0, ncore = ncore)
         out.loss <- 2*sqrt(gam*stats::var(lam.xn)) + c*n
         return(out.loss)
       })
       out.risk <- mean(loss)
-      return(out.risk)
+      return(out.risk) 
     })
   }
   Y <- log(risk - c*ns)

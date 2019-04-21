@@ -4,7 +4,7 @@
 \alias{rlambar}
 \title{Random generation for the functional mean of the Dirichlet process with a gamma distribution as the $F_0$ base distribution.}
 \usage{
-rlambar(N, alpha, lam0, theta0, eps = 0.1, ncore = NULL)
+rlambar(N, alpha, lam0, theta0, ncore, eps = 0.1)
 }
 \arguments{
 \item{N}{Number of observations.}
@@ -15,9 +15,9 @@ rlambar(N, alpha, lam0, theta0, eps = 0.1, ncore = NULL)
 
 \item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.}
 
-\item{eps}{Tolerance limit used in the simulation algorithm.}
-
 \item{ncore}{Number of cores to use in parallel computin. If NULL the function uses 1 core if there is only one core, if there is more than one cores uses one half of the cores.}
+
+\item{eps}{Tolerance limit used in the simulation algorithm.}
 }
 \value{
 A random sample of the functional mean of the Dirichlet process.

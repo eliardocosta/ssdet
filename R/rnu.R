@@ -20,7 +20,7 @@ rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 5E2) {
     lam <- sapply(seq_len(n), function(i) {
       q0 <- alpha*stats::dnbinom(x[i], mu = w*lam0, size = theta0)
       qk <- stats::dpois(x[i], lambda = w*lam[-i])
-      cn <- q0 + sum(qk) # normalization constant
+      cn <- q0 + sum(qk) 
       q0n <- q0/cn
       qkn <- qk/cn
       u <- stats::runif(1)
@@ -45,7 +45,7 @@ rnu <- function(nsam, x, w, lam0, theta0, alpha, nburn = 5E2) {
     lam <- sapply(seq_len(n), function(i) {
       q0 <- alpha*stats::dnbinom(x[i], mu = w*lam0, size = theta0)
       qk <- stats::dpois(x[i], lambda = w*lam[-i])
-      cn <- q0 + sum(qk) # normalization constant
+      cn <- q0 + sum(qk) 
       q0n <- q0/cn
       qkn <- qk/cn
       u <- stats::runif(1)

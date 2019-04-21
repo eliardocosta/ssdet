@@ -4,7 +4,7 @@
 \alias{rlambar.xn}
 \title{Random generation for the posterior functional mean of the Poisson/Dirichlet process with a gamma distribution as the $F_0$ base distribution.}
 \usage{
-rlambar.xn(N, alpha, x, w, lam0, theta0)
+rlambar.xn(N, alpha, x, w, lam0, theta0, ncore)
 }
 \arguments{
 \item{N}{Number of observations.}
@@ -18,6 +18,8 @@ rlambar.xn(N, alpha, x, w, lam0, theta0)
 \item{lam0}{A positive real number representing a hyperparameter of the $F_0$ base distribution.}
 
 \item{theta0}{A positive real number representing a hyperparameter of the $F_0$ base distribution. We consider $F_0$ as the gamma distribution with mean $lam_0$ and shape parameter $theta_0$.}
+
+\item{ncore}{Number of cores to use in parallel computin. If NULL the function uses 1 core if there is only one core, if there is more than one cores uses one half of the cores.}
 }
 \value{
 A random sample of the posterior functional mean of the Poisson/Dirichlet process.

@@ -1,6 +1,6 @@
 Package: ssdet
 Title: Sample size determination in frequentist and Bayesian approaches
-Version: 0.0.0.9200
+Version: 0.0.0.9300
 Authors@R: c(
             person("Eliardo G.", "Costa", email = "eliardocosta@ccet.ufrn.br", role = c("aut", "cre", "cph")),
             person("Julio M.", "Singer", email = "jmsinger@ime.usp.br", role = c("ths", "cph")),

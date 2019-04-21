@@ -8,9 +8,10 @@
 #' @param ncore Number of cores to use in parallel computin. If NULL the function uses 1 core if there is only one core, if there is more than one cores uses one half of the cores.
 #'
 #' @return A random sample of the functional mean of the Dirichlet process.
+#' @importFrom foreach "%dopar%"
 #' @export
 #'
-rlambar <- function(N, alpha, lam0, theta0, eps = 1E-1, ncore = NULL) {
+rlambar <- function(N, alpha, lam0, theta0, ncore, eps = 1E-1) {
   B <- stats::rbeta(1, 1, alpha)
   xi <- stats::rgamma(1, shape = theta0, rate = theta0/lam0)
   ulam <- B*xi + (1 - B)*.Machine$double.xmax

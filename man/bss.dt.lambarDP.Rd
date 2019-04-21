@@ -5,7 +5,8 @@
 \title{Bayesian sample size in a decision-theoretic approach for the functional mean of the Dirichlet process with a gamma distribution as the $F_0$ base distribution.}
 \usage{
 bss.dt.lambarDP(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NULL,
-  nmax = 100, nrep = 10, lrep = 50, plot = FALSE, ...)
+  nmax = 100, nlag = 10, nrep = 10, lrep = 50, plot = FALSE,
+  ncore = NULL, ...)
 }
 \arguments{
 \item{lf}{1 or 2, representing the loss function used.}
@@ -29,12 +30,16 @@ function 2.}
 \item{nmax}{A positive integer representing the maximum number for compute the Bayes risk.
 Default is 100.}
 
+\item{nlag}{A positive integer representing the lag in the n's used to compute the Bayes risk. Default is 10.}
+
 \item{nrep}{A positive integer representing the number of samples taken for each $n$.}
 
 \item{lrep}{A positive integer representing the number of samples taken for $S_n$. Default is 50.}
 
 \item{plot}{Boolean. If TRUE (default) it plot the estimated Bayes risks and the fitted
 curve.}
+
+\item{ncore}{Number of cores to use in parallel computin. If NULL the function uses 1 core if there is only one core, if there is more than one cores uses one half of the cores.}
 
 \item{...}{Currently ignored.}
 }
