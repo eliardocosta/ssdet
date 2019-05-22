@@ -11,7 +11,7 @@
 #'
 #' @noRd
 #' 
-lam.moller.alg <- function(llam, ulam, eps, alpha, lam0, theta0) {
+lambar.moller.alg <- function(llam, ulam, eps, alpha, lam0, theta0) {
   j <- 1
   while (abs(ulam - llam) > eps) {
     B <- stats::rbeta(1, 1, alpha)

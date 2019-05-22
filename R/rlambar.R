@@ -23,7 +23,7 @@ rlambar <- function(N, alpha, lam0, theta0, ncore, eps = 1E-1) {
   }
   doParallel::registerDoParallel(num.cores)
   out.lambar <- foreach::foreach (i = 1:N, .combine = 'c') %dopar% {
-    lam.moller.alg(llam = llam, ulam = ulam, eps = eps, alpha = alpha, lam0 = lam0, 
+    lambar.moller.alg(llam = llam, ulam = ulam, eps = eps, alpha = alpha, lam0 = lam0, 
                    theta0 = theta0)
     }
   doParallel::stopImplicitCluster()

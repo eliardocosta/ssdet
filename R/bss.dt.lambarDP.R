@@ -31,7 +31,9 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
   if (lf == 1) {
     risk <- sapply(ns, function(n) {
       loss <- sapply(seq_len(lrep), function(j) {
-        x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
+        lam <- rlam(n = n, alpha = alpha, lam0 = lam0, theta0 = theta0)
+        x <- stats::rpois(n, w*lam)
+        #x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
         lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
                              theta0 = theta0, ncore = ncore)
         qs <- stats::quantile(lam.xn, probs = c(rho/2, 1 - rho/2))
@@ -44,7 +46,9 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
   } else if (lf == 2) {
     risk <- sapply(ns, function(n) {
       loss <- sapply(seq_len(lrep), function(j) {
-        x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
+        lam <- rlam(n = n, alpha = alpha, lam0 = lam0, theta0 = theta0)
+        x <- stats::rpois(n, w*lam)
+        #x <- stats::rnbinom(n, mu = w*lam0, size = theta0)
         lam.xn <- rlambar.xn(N = 1E2, alpha = alpha, x = x, w = w, lam0 = lam0, 
                              theta0 = theta0, ncore = ncore)
         out.loss <- 2*sqrt(gam*stats::var(lam.xn)) + c*n
