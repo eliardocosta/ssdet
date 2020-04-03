@@ -80,7 +80,7 @@ bss.dt.nbPearson <- function(lf, lam0, theta0, phi, w, c, rho = NULL, gam = NULL
   G <- as.numeric(-mod$coef[2])
   nmin <- ceiling((E*G/c)^(1/(G + 1))-1)
   if (plot == TRUE) {
-    plot(rep(ns, each = nrep), risk, xlim = c(0, nmax), ylim = c(0, max(risk) + 1), xlab = "n", ylab = "TC(n)")
+    plot(rep(ns, each = nrep), risk, xlim = c(0, nmax), ylim = c(min(risk) - 0.5, max(risk) + 0.5), xlab = "n", ylab = "TC(n)")
     curve <- function(x) {c*x + E/(1 + x)^G}
     plot(function(x)curve(x), 0, nmax, col = "blue", add = TRUE)
     graphics::abline(v = nmin, col = "red")
