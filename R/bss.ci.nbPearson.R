@@ -14,8 +14,8 @@
 #' @return An integer representing the sample size.
 #' @export
 #'
-bss.ci.nbPearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, len.max = NULL, 
-                             R = 1E3, n0 = 1) {
+bss.ci.nbPearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, 
+                             len.max = NULL, R = 1E3, n0 = 1) {
   cl <- match.call()
   if (crit == "ACC") {
     cov <- 0 
@@ -25,17 +25,16 @@ bss.ci.nbPearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, len.ma
       cov <- numeric()
       probs <- numeric()
       for (i in 1:R) {
-        lam <- PearsonDS::rpearsonVI(n, a = theta0, b = theta0/lam0 + 1, location = 0, 
-                                     scale = phi/w)
+        lam <- PearsonDS::rpearsonVI(1, a = theta0, b = theta0/lam0 + 1, 
+                                     location = 0, scale = phi/w)
         x <- stats::rnbinom(n, mu = w*lam, size = phi)
         sn <- sum(x)
         kappa <- theta0 + sn
         psi <- theta0/lam0 + n*phi + 1
-        ab <- hpd.PearsonVI(kappa = kappa, psi = psi, phi = phi, w = w, len = len)
-        cov <- append(cov, 
-                      PearsonDS::ppearsonVI(ab[2], a = kappa, b = psi, location = 0, 
-                                            scale = phi/w) - PearsonDS::ppearsonVI(ab[1], 
-                                            a = kappa, b = psi, location = 0, scale = phi/w))
+        ab <- hpd.PearsonVI(kappa = kappa, psi = psi, phi = phi, w = w, 
+                            len = len)
+        cov <- append(cov, PearsonDS::ppearsonVI(ab[2], a = kappa, b = psi,
+                                                 location = 0, scale = phi/w) - PearsonDS::ppearsonVI(ab[1], a = kappa, b = psi, location = 0, scale = phi/w))
       }
     }
   } 
@@ -46,13 +45,14 @@ bss.ci.nbPearson <- function(crit, lam0, theta0, phi, w, rho, len = NULL, len.ma
       n <- n + 1
       len <- numeric()
       for (i in 1:R) {
-        lam <- PearsonDS::rpearsonVI(n, a = theta0, b = theta0/lam0 + 1, location = 0, 
-                                     scale = phi/w)
+        lam <- PearsonDS::rpearsonVI(1, a = theta0, b = theta0/lam0 + 1, 
+                                     location = 0, scale = phi/w)
         x <- stats::rnbinom(n, mu = w*lam, size = phi)
         sn <- sum(x)
         kappa <- theta0 + sn
         psi <- theta0/lam0 + n*phi + 1
-        ab <- hpd.PearsonVI(kappa = kappa, psi = psi, phi = phi, w = w, rho = rho)
+        ab <- hpd.PearsonVI(kappa = kappa, psi = psi, phi = phi, w = w, 
+                            rho = rho)
         len <- append(len, ab[2] - ab[1])
       }
     }
