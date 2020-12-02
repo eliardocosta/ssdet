@@ -14,6 +14,8 @@ devtools::install_github("eliardocosta/ssdet")
 
 ## Examples
 
-* The R codes to implement the algorithms and figures in [Costa, Lopes & Singer (2015)](http://doi.org/10.1016/j.marpolbul.2014.11.030) are available [here](https://gist.github.com/eliardocosta/f8d1c103353c0fed7b2b13f82f6793a6).
+* The R codes to implement the illustrative example in Costa, Paulino & Singer (2020, submitted) are available [here](https://gist.github.com/eliardocosta/85781d93cbaae35411eed74372c7c2d4).
 
 * The R codes to implement the algorithms and figures in [Costa, Lopes & Singer (2016)](http://dx.doi.org/10.1016/j.jenvman.2016.05.043) are available [here](https://gist.github.com/eliardocosta/ea37479b88f81a402ebb6c382ef1097c).
+
+* The R codes to implement the algorithms and figures in [Costa, Lopes & Singer (2015)](http://doi.org/10.1016/j.marpolbul.2014.11.030) are available [here](https://gist.github.com/eliardocosta/f8d1c103353c0fed7b2b13f82f6793a6).
