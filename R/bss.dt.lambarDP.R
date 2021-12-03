@@ -30,7 +30,6 @@ bss.dt.lambarDP <- function(lf, alpha, lam0, theta0, w, c, rho = NULL, gam = NUL
   ns <- rep(seq(3, nmax, by = nlag), each = nrep)
   if (lf == 1) {
     risk <- sapply(ns, function(n) {
-      print(n)
       loss <- sapply(seq_len(lrep), function(j) {
         lam <- rlam(n = n, alpha = alpha, lam0 = lam0, theta0 = theta0)
         x <- stats::rpois(n, w*lam)
